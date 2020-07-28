@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Example - Branching - Over 18
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/breadcrumb_examples.html" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% set message %}
+          {% if showMessage %}
+            <div class="govuk-success-summary" role="alert" aria-labelledby="success-summary-heading" tabindex="-1" data-module="govuk-error-summary" data-ga-event-form="success">
+              <h3 class="govuk-success-summary__title" id="success-summary-heading">Yesssss 🙌</h3>
+          </div>
+          {% endif %}
+        {% endset %}
+
+        {{ message | safe }}
+
+        <h1 class="govuk-heading-xl">
+          You answered the question!
+        </h1>
+        <p>
+          <a href="/docs/examples/success-errors">Back to the sucess and errors example</a>
+        </p>
+
+    </div>
+  </div>
+{% endblock %}
