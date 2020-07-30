@@ -7,6 +7,10 @@ const express = require('express')
 const marked = require('marked')
 const router = express.Router()
 
+// Getting data from Google Sheets 
+const request = require('request')
+const csv = require('csvtojson')
+
 // Local dependencies
 const utils = require('../lib/utils.js')
 
@@ -52,25 +56,6 @@ router.get('/examples/template-data', function (req, res) {
   res.render('examples/template-data', { name: 'Foo' })
 })
 
-// Showing a success message
-router.get('/examples/success-errors/result', function (req, res) {
-    res.render('examples/success-errors/answer', { showMessage: true })
-})
-
-// Showing a success + error message
-// https://github.com/alphagov/govuk-prototype-kit/pull/468
-// https://auth0.com/blog/express-validator-tutorial/
-// router.get('/examples/success-errors/result', function (req, res) {
-//   req.check('inputID').notEmpty()
-//   const errors = req.validationErrors()
-
-//   if(errors) {
-//     res.render('examples/success-errors/answer', { showError: true })
-//   } else {
-//     res.render('examples/success-errors/answer', { showMessage: true })
-//   }
-// })
-
 // Branching
 router.post('/examples/branching/over-18-answer', function (req, res) {
   // Get the answer from session data
@@ -84,6 +69,55 @@ router.post('/examples/branching/over-18-answer', function (req, res) {
   } else {
     res.redirect('/docs/examples/branching/over-18')
   }
+})
+
+// Showing a success message
+router.get('/examples/success-errors/result', function (req, res) {
+  res.render('examples/success-errors/answer', { showMessage: true })
+})
+
+// Showing a success + error message
+// https://github.com/alphagov/govuk-prototype-kit/pull/468
+// https://auth0.com/blog/express-validator-tutorial/
+
+// router.get('/examples/success-errors/result', function (req, res) {
+//   req.check('inputID').notEmpty()
+//   const errors = req.validationErrors()
+
+//   if(errors) {
+//     res.render('examples/success-errors/answer', { showError: true })
+//   } else {
+//     res.render('examples/success-errors/answer', { showMessage: true })
+//   }
+// })
+
+// Example that doesnt work
+// router.get('/publish/about-your-organisation', function (req, res) {
+//   var errors = validateOrg(req.session.data);
+
+//   if (errors.length > 0) {
+//     req.session.data['about-your-organisation-show-publish-errors'] = errors.length > 0;
+//   } else {
+//     req.session.data['about-your-organisation-publish-state'] = 'published';
+//     req.session.data['about-your-organisation-published-before'] = true;
+//   }
+
+//   res.redirect('/about-your-organisation?publish=true');
+// })
+
+// Getting data from Google Sheets
+// https://github.com/alphagov/govuk-prototype-kit/pull/682/files
+
+// Example - Google Sheets integration
+router.get('/examples/data-from-google-sheets', function (req, res) {
+  var googleSheetsUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQYoPJa7zlceGJiuiMLgcv_Emght1AgfsKd40rySrNqIjDpVRmpcalDuEGp9AlyoWll74I974oLLXzw/pub?gid=0&single=true&output=csv";
+  
+  csv()
+  .fromStream(request.get(googleSheetsUrl))
+  .then((googleSheetsData)=>{
+    res.render('examples/data-from-google-sheets/example', { googleSheetsData: googleSheetsData } )
+  });
+
 })
 
 module.exports = router

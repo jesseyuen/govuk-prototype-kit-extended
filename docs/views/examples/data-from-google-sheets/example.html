@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Example - Getting data from Google Sheets
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/breadcrumb_examples.html" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">
+          Example - Getting data from Google Sheets 
+        </h1>
+        <p>
+          You can show success alerts and error summaries based on interaction with forms.
+        </p>
+        <p>
+          The code for this example is in your prototype folder:
+        </p>
+
+        <pre class="app-code"><code>/docs/documentation_routes.js
+/docs/views/examples/success-errors</code></pre>
+
+      <table class="govuk-table">
+        <caption class="govuk-table__caption">Tunbridge Wells Open Data - Polling Districts</caption>
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th class="govuk-table__header" scope="col">OBJECTID</th>
+            <th class="govuk-table__header" scope="col">Letter</th>
+            <th class="govuk-table__header" scope="col">Polling_Di</th>
+            <th class="govuk-table__header" scope="col">Ward</th>
+            <th class="govuk-table__header" scope="col">Parliament</th>
+            <th class="govuk-table__header" scope="col">ADDRESS</th>
+            <th class="govuk-table__header" scope="col">County_Div</th>
+            <th class="govuk-table__header" scope="col">ShapeSTArea</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+          {% for item in googleSheetsData %}
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">{{ item["OBJECTID"] }}</td>
+            <td class="govuk-table__cell">{{ item['Letter'] }}</td>
+            <td class="govuk-table__cell">{{ item['Polling_Di'] }}</td>
+            <td class="govuk-table__cell">{{ item['Ward'] }}</td>
+            <td class="govuk-table__cell">{{ item['Parliament'] }}</td>
+            <td class="govuk-table__cell">{{ item['ADDRESS'] }}</td>
+            <td class="govuk-table__cell">{{ item['County_Div'] }}</td>
+            <td class="govuk-table__cell">{{ item['ShapeSTArea'] }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+{% endblock %}
