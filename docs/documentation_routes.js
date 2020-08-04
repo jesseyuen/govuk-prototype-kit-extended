@@ -72,25 +72,32 @@ router.post('/examples/branching/over-18-answer', function (req, res) {
 })
 
 // Showing a success message
-router.get('/examples/success-errors/result', function (req, res) {
-  res.render('examples/success-errors/answer', { showMessage: true })
-})
+// router.get('/examples/success-errors/result', function (req, res) {
+//   res.render('examples/success-errors/answer', { showMessage: true })
+// })
 
 // Showing a success + error message
 // https://github.com/alphagov/govuk-prototype-kit/pull/468
 // https://auth0.com/blog/express-validator-tutorial/
 
-// router.get('/examples/success-errors/result', function (req, res) {
-//   req.check('inputID').notEmpty()
-//   const errors = req.validationErrors()
+// Sets upa a check for values in a form input
+const isValueIsSet = (value) => {
+  if (value.length > 0) {
+    return true
+  } else {
+    return false
+  }
+}
 
-//   if(errors) {
-//     res.render('examples/success-errors/answer', { showError: true })
-//   } else {
-//     res.render('examples/success-errors/answer', { showMessage: true })
-//   }
-// })
+router.get('/examples/success-errors/result', function (req, res) {
+  let formValid = isValueIsSet(req.query.your_name)
 
+  if(formValid) {
+    res.render('examples/success-errors/answer', { showMessage: true })
+  } else {
+    res.render('examples/success-errors/index', { showError: true })
+  }
+})
 // Example that doesnt work
 // router.get('/publish/about-your-organisation', function (req, res) {
 //   var errors = validateOrg(req.session.data);
