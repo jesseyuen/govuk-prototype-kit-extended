@@ -27,20 +27,17 @@
 
         {% endif %}
 
-      <form action="/docs/examples/success-errors/result" method="get" class="form">
+      <form action="/docs/examples/error-states/result" method="get" class="form">
 
         <h1 class="govuk-heading-xl">
-          Showing succcess and errors 
+          Showing errors states 
         </h1>
-        <p>
-          You can show success alerts and error summaries based on interaction with forms.
-        </p>
         <p>
           The code for this example is in your prototype folder:
         </p>
 
         <pre class="app-code"><code>/docs/documentation_routes.js
-/docs/views/examples/success-errors</code></pre>
+/docs/views/examples/error-states</code></pre>
 
         <div class="govuk-form-group">
 
@@ -49,9 +46,9 @@
               text: "What is your name?",
               classes: "govuk-label--m"
             },
-            id: "your-name",
-            name: "your_name",
-            value: data['your_name'],
+            id: "your-name-1",
+            name: "your_name_1",
+            value: data['your_name_1'],
             classes: "govuk-!-width-one-half"
           }) }}
         

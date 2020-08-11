@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Example - Branching
+{% endblock %}
+
+{% block beforeContent %}
+  {% include "includes/breadcrumb_examples.html" %}
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        {% if showError %}
+          
+          {{ govukErrorSummary({
+            titleText: "There is a problem",
+            errorList: [
+              {
+                text: "Enter your name",
+                href: "#id"
+              }
+            ]
+          }) }}
+
+        {% endif %}
+
+      <form action="/docs/examples/success-alerts/result" method="get" class="form">
+
+        <h1 class="govuk-heading-xl">
+          Showing succcess alerts 
+        </h1>
+        <p>
+          The code for this example is in your prototype folder:
+        </p>
+
+        <pre class="app-code"><code>/docs/documentation_routes.js
+/docs/views/examples/success-alerts</code></pre>
+
+        <div class="govuk-form-group">
+
+          {{ govukInput({
+            label: {
+              text: "What is your name?",
+              classes: "govuk-label--m"
+            },
+            id: "your-name-2",
+            name: "your_name_2",
+            value: data['your_name_2'],
+            classes: "govuk-!-width-one-half"
+          }) }}
+        
+        </div>
+
+        <button class="govuk-button" data-module="govuk-button">Continue</button>
+
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

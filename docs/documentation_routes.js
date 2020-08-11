@@ -71,16 +71,15 @@ router.post('/examples/branching/over-18-answer', function (req, res) {
   }
 })
 
-// Showing a success message
-// router.get('/examples/success-errors/result', function (req, res) {
-//   res.render('examples/success-errors/answer', { showMessage: true })
-// })
+// Success alerts
 
-// Showing a success + error message
-// https://github.com/alphagov/govuk-prototype-kit/pull/468
-// https://auth0.com/blog/express-validator-tutorial/
+router.get('/examples/success-alerts/result', function (req, res) {
+    res.render('examples/success-alerts/answer', { showMessage: true })
+})
 
-// Sets upa a check for values in a form input
+// Error states
+
+// Sets up a check for values in a form input
 const isValueIsSet = (value) => {
   if (value.length > 0) {
     return true
@@ -89,28 +88,15 @@ const isValueIsSet = (value) => {
   }
 }
 
-router.get('/examples/success-errors/result', function (req, res) {
-  let formValid = isValueIsSet(req.query.your_name)
+router.get('/examples/error-states/result', function (req, res) {
+  let formValid = isValueIsSet(req.query.your_name_1)
 
   if(formValid) {
-    res.render('examples/success-errors/answer', { showMessage: true })
+    res.render('examples/error-states/answer', { showMessage: true })
   } else {
-    res.render('examples/success-errors/index', { showError: true })
+    res.render('examples/error-states/index', { showError: true })
   }
 })
-// Example that doesnt work
-// router.get('/publish/about-your-organisation', function (req, res) {
-//   var errors = validateOrg(req.session.data);
-
-//   if (errors.length > 0) {
-//     req.session.data['about-your-organisation-show-publish-errors'] = errors.length > 0;
-//   } else {
-//     req.session.data['about-your-organisation-publish-state'] = 'published';
-//     req.session.data['about-your-organisation-published-before'] = true;
-//   }
-
-//   res.redirect('/about-your-organisation?publish=true');
-// })
 
 // Getting data from Google Sheets
 // https://github.com/alphagov/govuk-prototype-kit/pull/682/files
