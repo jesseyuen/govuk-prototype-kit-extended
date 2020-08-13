@@ -80,7 +80,7 @@ router.get('/examples/success-alerts/result', function (req, res) {
 // Error states
 
 // Sets up a check for values in a form input
-const isValueIsSet = (value) => {
+const isValueSet = (value) => {
   if (value.length > 0) {
     return true
   } else {
@@ -89,10 +89,28 @@ const isValueIsSet = (value) => {
 }
 
 router.get('/examples/error-states/result', function (req, res) {
-  let formValid = isValueIsSet(req.query.your_name_1)
+  let nameValid = isValueSet(req.query.your_name_2)
+  let foodValid = isValueSet(req.query.fav_food)
 
-  if(formValid) {
-    res.render('examples/error-states/answer', { showMessage: true })
+  let nameInput = {
+    label: {
+      text: "What is your name?",
+      classes: "govuk-label--m"
+    },
+    id: "your-name-2",
+    name: "your_name_2",
+    value: data['your_name_2'],
+    classes: "govuk-!-width-one-half"
+  }
+  
+  if (nameValid === false ){
+    nameInput.errorMessage = {
+      html: 'Enter your name'
+    }
+  }
+
+  if ( (nameValid) & (foodValid) ) {
+    res.render('examples/error-states/answer', { showMessage: true, nameInput: nameInput  })
   } else {
     res.render('examples/error-states/index', { showError: true })
   }

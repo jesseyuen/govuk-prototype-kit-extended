@@ -13,6 +13,14 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
 
+        {# Set error messages #}
+        
+        
+        {% set food_error_message %}
+          Enter your favourite food
+        {% endset %}
+        
+        {# Show the error summary #}
         {% if showError %}
           
           {{ govukErrorSummary({
@@ -20,7 +28,11 @@
             errorList: [
               {
                 text: "Enter your name",
-                href: "#id"
+                href: "#your-name-2"
+              },
+              {
+                text: "Enter your favourite name",
+                href: "#fav_food"
               }
             ]
           }) }}
@@ -41,14 +53,20 @@
 
         <div class="govuk-form-group">
 
+          {# errorMessage: {
+            html: name_error_message
+          }, #}
+
+          {{ govukInput( nameInput ) }}
+          
           {{ govukInput({
             label: {
-              text: "What is your name?",
+              text: "What is your favourite food?",
               classes: "govuk-label--m"
             },
-            id: "your-name-1",
-            name: "your_name_1",
-            value: data['your_name_1'],
+            id: "fav-food",
+            name: "fav_food",
+            value: data['fav_food'],
             classes: "govuk-!-width-one-half"
           }) }}
         
