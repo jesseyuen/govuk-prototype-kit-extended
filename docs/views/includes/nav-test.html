@@ -1,0 +1,25 @@
+{# {% macro menuLink(text='', url='') %}
+    <a class="{% if activePage == "{{text}}" %} active {% endif %}" href="{{url}}">{{text}}</a>
+{% endmacro %} #}
+
+<nav>
+  <h4>heading 1</h4>
+  <ul>
+    <li>
+      <a class="{{ 'active' if activePage == 'cookies' }}" href="cookies">Cookies</a>
+    </li>
+    <li>
+      <a class="{{ 'active' if activePage == 'cookies-2' }}" href="cookies-2">Cookies 2</a>
+    </li>
+  </ul>
+  <h4>Heading 2</h4>
+  <ul>
+    <li>
+      <a class="" href="/patterns/addresses/">Addresses</a>
+    </li>
+
+    <li>
+      <a class="" href="/patterns/bank-details/">Bank details</a>
+    </li>
+  </ul>
+</nav>

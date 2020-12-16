@@ -90,7 +90,7 @@ const isValueSet = (value) => {
 
 router.get('/examples/error-states/result', function (req, res) {
   let nameValid = isValueSet(req.query.your_name_2)
-  let foodValid = isValueSet(req.query.fav_food)
+  // let foodValid = isValueSet(req.query.fav_food)
 
   let nameInput = {
     label: {

@@ -11,15 +11,13 @@
 {% block content %}
 
   <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      {% include "includes/nav-test.html" %}
+    </div>
     <div class="govuk-grid-column-two-thirds">
 
-      <h1 class="govuk-heading-xl">
-        Heading goes here
-      </h1>
-
-      <p>This is a paragraph of text. It explains in more detail what has happened and wraps across several lines.</p>
-
-      <p>This paragraph has a link to <a href="/url/of/onward/page">find out more about this subject</a>.</p>
+      {% block pageContent %}
+      {% endblock %}
 
     </div>
   </div>
